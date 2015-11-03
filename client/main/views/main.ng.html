@@ -1,0 +1,5 @@
+<h1> main post page</h1>
+
+<ul>
+    <li ng-repeat="post in posts" ><h2><a ng-href="/#/viewpost/{{post._id}}" ng-bind-html="post.title | to_trusted"></a></h2></li>
+</ul>
