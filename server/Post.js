@@ -2,16 +2,34 @@
  * Created by andrea.terzani on 03/11/2015.
  */
 
+
+
+Meteor.publish("posts", function (options) {
+    var page = (options.limit/10);
+    Meteor.call('getPosts',page);
+    return  Posts.find({},options);
+});
+
+Meteor.publish('singlePost', function(id) {
+    Meteor.call('getPost',id);
+    return id && Posts.find(id);
+});
+
+
 Meteor.methods({
-    getPosts: function () {
+    getPosts: function (page) {
+            console.log('getPosts REST CALL => page:'+page);
+            var _page = page.toString();
+
             this.unblock();
             try {
-                var result = HTTP.call("GET", "https://www.codetutorial.io/api/get_posts/?page=1&count=10",
+                var result = HTTP.call("GET", "https://www.codetutorial.io/api/get_posts/?page="+_page+"&count=10",
                     function (error, result) {
                         if (!error) {
                             var jsonContent = JSON.parse(result.content);
                             var posts  = jsonContent.posts;
-
+                            max_post_count = parseInt(jsonContent.count_total);
+                            console.log(max_post_count);
                             posts.forEach(function(post){
 
                                 var exitst = Posts.findOne({id: post.id});
@@ -20,8 +38,12 @@ Meteor.methods({
                                     var newpost = {
                                         id:post.id,
                                         title:post.title,
-                                        excerpt:post.excerpt
-                                    };
+                                        excerpt:post.excerpt,
+                                        date:new Date(post.date),
+                                        categories:post.categories
+                                };
+
+
 
                                     Posts.insert(newpost);
                                 }
@@ -53,7 +75,6 @@ Meteor.methods({
             } catch (e) {
                 return false;
             }
-
     }
 
 });

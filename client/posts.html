@@ -1,0 +1,23 @@
+
+<template name="posts">
+    {{#each posts}}
+            {{> post}}
+    {{/each}}
+        <div class="row">
+            <div class="col-md-12">
+                {{#if nextPath}}
+                    <a class="load-more" href="{{nextPath}}"><button class="btn btn-primary"> Load more </button></a>
+                {{/if}}
+            </div>
+        </div>
+</template>
+
+
+<template name="post">
+    <div class="row">
+        <div class="col-md-12">
+            <a href="/viewpost/{{_id}}"><h2>{{{title}}}</h2></a>
+            <div>{{{excerpt}}}</div>
+        </div>
+    </div>
+</template>
