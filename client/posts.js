@@ -29,18 +29,13 @@ Template.article.helpers({
            var content = $(val).find('textarea').val();
            var id =  $(val).attr('id');
            var htmlcontent = jQuery("<div />").text(content).html();
-
            rendered.find("#"+id).replaceWith('<pre><code>'+htmlcontent+'</code></pre>');
        });
-
 
        rendered.find('img').removeClass().addClass('img-responsive center-block').wrap( "<div class='article-image' layout='row' layout-align='center'></div>" );
 
        return rendered.html();
-   },
-    log: function () {
-        console.log(this);
-    }
+   }
 });
 
 /*
