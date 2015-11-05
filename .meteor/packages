@@ -22,3 +22,6 @@ iron:router
 mrt:bootstrap-3
 multiply:iron-router-progress
 kenlimmj:hljs
+fourseven:scss
+accounts-password
+ian:accounts-ui-bootstrap-3

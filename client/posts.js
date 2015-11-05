@@ -1,16 +1,4 @@
 
-/**
- * Created by andrea.terzani on 04/11/2015.
- */
-/*
-Template.posts.helpers({
-    posts:function(){
-        var posts  = Posts.find();
-        return posts;
-    }
-});
-*/
-
 Template.article.onRendered(function(){
     console.log('onrendered');
 
@@ -38,30 +26,21 @@ Template.article.helpers({
    }
 });
 
-/*
-Template.viewPost.rendered = function(){
+Template.post.helpers({
+   list_categories: function(){
+       var list=[];
 
-    var self= this;
-    console.log('Template.viewPost.rerendered');
-    this.autorun(function(){
-        console.log("autorun");
+       this.categories.forEach(function(cat){
+           if(cat.slug != 'tutorial-it' && list.length <3){
+               list.push(cat);
+           }
+       });
 
-        var rendered = $('<div></div>');
-        rendered.append(self.data.content);
+        return list;
+   },
+    image_url:function(){
+        console.log( this.attachments[0].url);
+        return this.attachments[0].url;
+    }
+});
 
-        rendered.find('.crayon-syntax').each(function(i,val){
-            var content = $(this).find('textarea').val();
-            var id =  $(this).attr('id');
-            rendered.find("#"+id).replaceWith('<div hljs>'+content+'</div>');
-        });
-
-        rendered.find('div').removeClass();
-
-        rendered.find('img').removeClass().addClass('img-responsive center-block').wrap( "<div class='article-image' layout='row' layout-align='center'></div>" );
-
-        self.data.content=rendered.html();
-
-
-    }.bind(this));
-};
-*/

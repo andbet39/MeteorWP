@@ -1,13 +1,36 @@
 <template name="layout">
-    <div class="container">
-        <header class="navbar">
-            <div class="navbar-inner">
-               <h1><a class="brand" href="/">CODETutorial</a></h1>
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,800|Lato:400,900,700,300' rel='stylesheet' type='text/css'>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <body>
+    <header>
+        <div class="overlay">
+            <div class="logo">
+                <img src="https://www.codetutorial.io/wordpress/wp-content/uploads/2015/07/logoCodenew.png"/>
             </div>
-        </header>
-        <div id="main" class="row-fluid">
+        </div>
+    </header>
+    <div id="navigation">
+        <nav id="navbar">
+                <ul class="left">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="https://www.codetutorial.io">WP Version</a></li>
+                          <!-- <li><a href="#">Specials</a></li>
+                           <li><a href="#">Contact</a></li>-->
+                </ul>
+                <ul class="right">
+                    {{> loginButtons}}
+                </ul>
+        </nav>
+    </div>
+    <section class="content">
+        <div class="container">
             {{> yield}}
         </div>
+    </section>
+    <footer>
+        <span>Designed by <a href="http://www.twitter.com/davieb"></a></span>
+    </footer>
+    </body>
 
-    </div>
 </template>
