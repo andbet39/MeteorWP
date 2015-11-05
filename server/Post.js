@@ -57,9 +57,11 @@ Meteor.methods({
     },
     getPost: function (post_id) {
 
-        console.log ("Server getPost "+     post_id);
 
         var post = Posts.findOne(post_id);
+        if(!post.content){
+            console.log ("Server getPost "+     post_id);
+
         var wp_post_id = post.id.toString();
          this.unblock();
             try {
@@ -75,6 +77,7 @@ Meteor.methods({
             } catch (e) {
                 return false;
             }
+        }
     }
 
 });
